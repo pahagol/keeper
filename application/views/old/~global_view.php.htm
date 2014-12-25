@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<base href="<?= base_url(); ?>"/>
+	<meta charset="utf-8" />
+	<title>Partnerka 2.0</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="robots" content="index,follow" />
+	<link rel="stylesheet" type="text/css" media="all" href="css/style.css" />
+	<link rel="Stylesheet" type="text/css" href="css/smoothness/jquery-ui-1.7.1.custom.css"  />
+	<!--[if IE 7]><link rel="stylesheet" href="css/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+	<!--[if IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" media="screen, projection" /><![endif]-->
+	<link rel="stylesheet" type="text/css" href="markitup/skins/markitup/style.css" />
+	<link rel="stylesheet" type="text/css" href="markitup/sets/default/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/superfish.css" media="screen"/>
+	<!--[if IE]>
+		<style type="text/css">
+		  .clearfix {
+		    zoom: 1;     /* triggers hasLayout */
+		    display: block;     /* resets display for IE/Win */
+		    }  /* Only IE can see inside the conditional comment
+		    and read this CSS rule. Don't ever use a normal HTML
+		    comment inside the CC or it will close prematurely. */
+		</style>
+	<![endif]-->
+	<!-- JavaScript -->
+	<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.7.1.custom.min.js"></script>
+	<script type="text/javascript" src="js/hoverIntent.js"></script>
+	<script type="text/javascript" src="js/superfish.js"></script>
+	<script type="text/javascript">
+		// initialise plugins
+		jQuery(function(){
+			jQuery('ul.sf-menu').superfish();
+		});
+
+	</script>
+	<script type="text/javascript" src="js/excanvas.pack.js"></script>
+	<script type="text/javascript" src="js/jquery.flot.pack.js"></script>
+	<script type="text/javascript" src="markitup/jquery.markitup.pack.js"></script>
+	<script type="text/javascript" src="markitup/sets/default/set.js"></script>
+	<script type="text/javascript" src="js/custom.js"></script>
+
+	<!--[if IE]><script language="javascript" type="text/javascript" src="excanvas.pack.js"></script><![endif]-->
+	</head>
+	<body>
+<div class="container" id="container">
+      <div id="header">
+    <div id="profile_info" class="r3"> <img src="img/avatar.jpg" id="avatar" alt="avatar" />
+          <p>Добро пожаловать <strong>
+            <?= $this->user->name ?>
+            </strong>. <a href="login/logout">Выйти?</a></p>
+          <p>Сообщений: 0. <a href="#">Читать?</a></p>
+          <p class="last_login">Дата последнего входа: 21:03 12.05.2009</p>
+    </div>
+    <div id="logo">
+          <h1><a href=""></a></h1>
+    </div>
+      <div class="clear"></div>
+  </div>
+      <!-- end header -->
+      <div id="content" >
+    <div id="top_menu" class="clearfix">
+          <ul class="sf-menu">
+        <!-- DROPDOWN MENU -->
+        <?if(!$this->user->is_admin()):?>
+        <li class="current"> <a href="">Главная</a></li>
+        <li> <a href="finance">Финансы</a> </li>
+        <li> <a href="sites">Площадки</a></li>
+        <li> <a href="loyalty">Лояльность</a> </li>
+        <li><a href="stats">Статистика</a></li>
+        <li><a href="refs">Рефералы</a></li>
+        <?else:?>
+        <li><a href=""></a></li>
+        <?endif;?>
+      </ul>
+          <a href="#" id="visit" class="right">Visit site</a> 
+    </div>
+    
+        <?=$cont?>
+  </div>
+      <!-- end #content -->
+      
+      <div  id="footer" class="clearfix">
+    <p class="left">Inetrek Partner System - Ultimate Statistics Solution</p>
+    <p class="right">В© 2011 Inetrek</p>
+  </div>
+      <!-- end #footer --> 
+    </div>
+<!-- end container -->
+
+</body>
+</html>

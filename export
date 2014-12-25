@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mysqldump -uroot -padmin keeper > keeper.sql
