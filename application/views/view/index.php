@@ -13,7 +13,7 @@
 				<td colspan="4"><?=$date?></td>
 			</tr>
 		<? foreach ($group as $expense): ?>
-			<tr>
+			<tr id="tr-expense-<?=$expense->id?>">
 				<td align="left">
 					<select onchange="moduleView.saveSelect(this, <?=$expense->id?>, 'categoryId')">
 					<? foreach ($categories as $category): ?>
@@ -27,7 +27,7 @@
 				<td align="left">
 					<input type="text" name="price" value="<?=$expense->price?>" data-id="<?=$expense->id?>" data-value="<?=$expense->price?>" onkeyup="moduleView.savePriceInput(this, '#price-sum-<?=$date?>', event)" />
 				</td>
-				<td class="view-action" onclick="moduleView.del(<?=$expense->id?>)" title="Удалить"></td>
+				<td class="view-action" onclick="moduleView.del(<?=$expense->id?>, '#price-sum-<?=$date?>')" title="Удалить"></td>
 			</tr>
 		<? endforeach ?>
 			<tr>

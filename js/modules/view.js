@@ -130,7 +130,7 @@ var moduleView = {
 		$(elmId).html(summa);
 	},
 
-	del: function(id) {
+	del: function(id, elmId) {
 		if (!id) {
 			keeper.showMessage('Id is empty');
 			return;
@@ -138,11 +138,17 @@ var moduleView = {
 
 		var from = keeper.getParameterByName('from');
 
-		keeper.success = function() {
+		keeper.widgetAjax.success = keeper.bind(function(data) {
+			if (data.id && elmId) {
+				$('#tr-expense-' + data.id).remove();
+				this.sumPrice(elmId);
+			}
 			keeper.showMessage('Данные успешно обработаны', 'green');
-			location.href = from ? '/view?from=' + from : '/view';
-		};
-		keeper.ajax('/view/delete', {id: id});
+			if (!data.id) {
+				location.href = from ? '/view?from=' + from : '/view';
+			}
+		}, this);
+		keeper.widgetAjax.send('/view/delete', {id: id});
 	}
 };
 

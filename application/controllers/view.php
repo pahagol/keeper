@@ -86,21 +86,21 @@ class View extends Base
 	public function delete()
 	{
 		$this->load->model('Expense', 'expense');
-		$data = $this->input->post(null, true);
+		$id = $this->input->post('id', true);
 
-		if (empty($data['id'])) {
+		if (empty($id)) {
 			$this->output->set_output(json_encode(array('error' => 'Id is empty')));
 			return;
 		}
 		
 		try {
-			$this->expense->deleteByUserId($data['id'], $this->_user->id);
+			$this->expense->deleteByUserId($id, $this->_user->id);
 		} catch (Exception $e) {
 			$this->output->set_output(json_encode(array('error' => $e->getMessage())));
 			return;
 		}
 
-		$this->output->set_output(json_encode(array('success' => true)));
+		$this->output->set_output(json_encode(array('success' => array('id' => $id))));
 	}
 
 	public function saveDictionaryExpenseName()
