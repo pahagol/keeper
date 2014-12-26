@@ -43,14 +43,15 @@ keeper.widgetAjax = {
 			try {
 				var response = JSON.parse(this._transport.responseText);
 			} catch(e) {
+				console.log(e);
 				keeper.showMessage('Response is wrong format', 'red');
 			}
-			// try {
+			try {
 				this.complete(response);
-			// } catch(e) {
-			// 	console.log(e);
-			// 	keeper.showMessage('Error in complete ', 'red');
-			// }
+			} catch(e) {
+				console.log(e);
+				keeper.showMessage('Error in complete ', 'red');
+			}
 		}
 	},
 
