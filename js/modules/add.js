@@ -36,10 +36,7 @@ var moduleAdd = {
 			return;
 		}
 
-		keeper.widgetAjax.success = keeper.bind(function(data) {
-			this.sumMonthPrice(data.price);
-			keeper.showMessage('Данные успешно обработаны', 'green');
-		}, this);
+		keeper.widgetAjax.success = keeper.bind(this.success, this);
 		keeper.widgetAjax.send('/add/save', {
 			categoryId: categoryId,
 			ownerId: ownerId,
@@ -49,9 +46,9 @@ var moduleAdd = {
 			dictionaryExpenseNameId: dictionaryExpenseNameId
 		});
 	},
-	sumMonthPrice: function(price) {
-		var summa = parseInt($('#price-month-sum').html()) + parseInt(price);
-		$('#price-month-sum').html(summa);
+	success: function(data) {
+		keeper.viewSumMonthPrice(data.price);
+		keeper.showMessage('Данные успешно обработаны', 'green');
 	}
 };
 

@@ -42,10 +42,15 @@ keeper.widgetAjax = {
 		} else {
 			try {
 				var response = JSON.parse(this._transport.responseText);
-				this.complete(response);
 			} catch(e) {
 				keeper.showMessage('Response is wrong format', 'red');
-			};
+			}
+			// try {
+				this.complete(response);
+			// } catch(e) {
+			// 	console.log(e);
+			// 	keeper.showMessage('Error in complete ', 'red');
+			// }
 		}
 	},
 

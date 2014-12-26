@@ -59,28 +59,29 @@ class View extends Base
 	{
 		$this->load->model('Expense', 'expense');
 		$data = $this->input->post(null, true);
+		extract($data, EXTR_REFS);
 
-		if (empty($data['id'])) {
+		if (empty($id)) {
 			$this->output->set_output(json_encode(array('error' => 'Id is empty')));
 			return;
 		}
-		if (empty($data['field'])) {
+		if (empty($field)) {
 			$this->output->set_output(json_encode(array('error' => 'Field is empty')));
 			return;
 		}
-		if (empty($data['value'])) {
+		if (empty($value)) {
 			$this->output->set_output(json_encode(array('error' => 'Value is empty')));
 			return;
 		}
 
 		try {
-			$this->expense->editByUserId($data['id'], $this->_user->id, array($data['field'] => $data['value']));
+			$this->expense->editByUserId($id, $this->_user->id, array($field => $value));
 		} catch (Exception $e) {
 			$this->output->set_output(json_encode(array('error' => $e->getMessage())));
 			return;
 		}
-
-		$this->output->set_output(json_encode(array('success' => true)));
+		$success = $field == 'price' ? array('summa' => $this->project->getSummaMonth($this->_user->id)) : true;
+		$this->output->set_output(json_encode(array('success' => $success)));
 	}
 
 	public function delete()
@@ -100,7 +101,7 @@ class View extends Base
 			return;
 		}
 
-		$this->output->set_output(json_encode(array('success' => array('id' => $id))));
+		$this->output->set_output(json_encode(array('success' => array('id' => $id, 'summa' => $this->project->getSummaMonth($this->_user->id)))));
 	}
 
 	public function saveDictionaryExpenseName()

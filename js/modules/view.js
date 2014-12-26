@@ -7,6 +7,19 @@ var moduleView = {
 		keeper.showMessage('Данные успешно обработаны', 'green');
 		$('input').blur();
 	},
+
+	_successPrice: function(data) {
+		// отобразить в header сумму за месяц
+		keeper.viewSumMonthPrice(data.summa);
+		// удалить ноду
+		if (data.id) {
+			$('#tr-expense-' + data.id).remove();
+		}
+		// пересчитать сумму за день
+		this.sumPrice(this.elmId);
+		
+		keeper.showMessage('Данные успешно обработаны', 'green');
+	},
 	
 	changePeriod: function(elm) {
 		var date = $(elm).find('option:selected').val();
@@ -47,25 +60,22 @@ var moduleView = {
 			return;
 		}
 
-		keeper.success = this._success;
-		keeper.ajax('/view/saveDictionaryExpenseName', {
-			name: value,
-			expenseId: expenseId,
-			dictionaryExpenseNameId: dictionaryExpenseNameId
-		});
+		keeper.widgetAjax.success = this._success;
+		keeper.widgetAjax.send('/view/saveDictionaryExpenseName', {name: value, expenseId: expenseId, dictionaryExpenseNameId: dictionaryExpenseNameId});
 			
 	},
-	savePriceInput: function(input, elmId, e) {
-		var value = $(input).val(),
-			expenseId = $(input).attr('data-id'),
-			currentValue = $(input).attr('data-value')/*,
-			span = $(input).parent().find('span')*/;
-
+	pressPriceInput: function(input, elmId, e) {
 		if (e.which != 13) {
 			return;
 		}	
+		$(input).blur();
+		this.savePriceInput(input, elmId)
+	},
+	savePriceInput: function(input, elmId) {
+		var value = $(input).val(),
+			expenseId = $(input).attr('data-id'),
+			currentValue = $(input).attr('data-value');
 
-		// $(input).hide();
 		if (!expenseId) {
 			keeper.showMessage('Id пустое');
 			$(input).val(currentValue);
@@ -87,19 +97,17 @@ var moduleView = {
 			$(input).val(currentValue);
 			return;
 		}
-		
-		// $(span).show().html(value);
 
-		keeper.success = this._success;
-		keeper.ajax('/view/save', {
+		this.elmId = elmId;
+		
+		keeper.widgetAjax.success = keeper.bind(this._successPrice, this);
+		keeper.widgetAjax.send('/view/save', {
 			id: expenseId,
 			field: 'price',
 			value: value
 		});
 
-		if (elmId) {
-			this.sumPrice(elmId);
-		}
+		$(input).attr('data-value', value);
 	},
 
 	saveSelect: function(select, id, field) {
@@ -110,8 +118,8 @@ var moduleView = {
 			return;
 		}
 
-		keeper.success = this._success;
-		keeper.ajax('/view/save', {
+		keeper.widgetAjax.success = this._success;
+		keeper.widgetAjax.send('/view/save', {
 			id: id,
 			field: field,
 			value: value
@@ -126,8 +134,11 @@ var moduleView = {
 			summa += parseInt($(this).val());
 		});
 
-		keeper.summaMonth += summa;
-		$(elmId).html(summa);
+		if (summa) {
+			$(elmId).html(summa);
+		} else {
+			$(parent).remove();
+		}
 	},
 
 	del: function(id, elmId) {
@@ -137,17 +148,9 @@ var moduleView = {
 		}
 
 		var from = keeper.getParameterByName('from');
+		this.elmId = elmId;
 
-		keeper.widgetAjax.success = keeper.bind(function(data) {
-			if (data.id && elmId) {
-				$('#tr-expense-' + data.id).remove();
-				this.sumPrice(elmId);
-			}
-			keeper.showMessage('Данные успешно обработаны', 'green');
-			if (!data.id) {
-				location.href = from ? '/view?from=' + from : '/view';
-			}
-		}, this);
+		keeper.widgetAjax.success = keeper.bind(this._successPrice, this);
 		keeper.widgetAjax.send('/view/delete', {id: id});
 	}
 };

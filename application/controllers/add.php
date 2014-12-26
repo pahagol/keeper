@@ -69,8 +69,7 @@ class Add extends Base
 			return;
 		}
 
-		$price = preg_match('/^' . date('Y-m') . '/', $dateAdd) ? $price : 0;
-		$this->output->set_output(json_encode(array('success' => array('price' => $price))));
+		$this->output->set_output(json_encode(array('success' => array('price' => $this->project->getSummaMonth($userId)))));
 	}
 
 	public function searchDictionaryExpenseName()

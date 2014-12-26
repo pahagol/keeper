@@ -8,7 +8,7 @@ var keeper = {
 	_ajaxTimeout: 2000,
 	_showMessageTimeout: 1000,
 
-	summaMonth: 0,
+	// summaMonth: 0,
 
 	_pad: function(number) {
 		return number.toString().replace(/^([0-9])$/, '0$1');
@@ -110,9 +110,14 @@ var keeper = {
 		$('#' + (!link ? 'add' : link)).addClass('current');
 	},
 
-	sumMonthPrice: function() {
-		$('#price-month-sum').html(this.summaMonth);
+	viewSumMonthPrice: function(summa) {
+		$('#price-month-sum').html(summa);
 	},
+
+	// recountSumMonthPrice: function(price) {
+	// 	var summa = parseInt($('#price-month-sum').html()) + parseInt(price);
+	// 	$('#price-month-sum').html(summa);
+	// },
 
 	logout: function() {
 		document.cookie = "auth=; expires=Thu, 01-Jan-1970 00:00:01 GMT";
