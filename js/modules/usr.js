@@ -1,27 +1,26 @@
 (function(keeper) {
 
 var moduleUsr = {
+	elm: 'input[name="password"]',
+
 	toggleInputPassword: function() {
-		var type = $('input[name="password"]').attr('type');
-		if (type == 'password') {
-			$('input[name="password"]').attr('type', 'text');
-		} else {
-			$('input[name="password"]').attr('type', 'password');
-		}
+		var type = $(this.elm).attr('type');
+		$(this.elm).attr('type', (type == 'password' ? 'text' : 'password'));
 	},
 	save: function() {
-		var password = $('input[name="password"]').val();
+		var password = $(this.elm).val();
 		
 		if (!password) {
 			keeper.showMessage('Пароль не может быть пустым')
 			return;
 		}
 
-		keeper.success = function() {
+		keeper.widgetAjax.success = function() {
+			$(this.elm).val('');
 			keeper.showMessage('Данные успешно обработаны', 'green');
-			location.href = '/usr';
+			// location.href = '/usr';
 		};
-		keeper.ajax('/usr/savePass', {
+		keeper.widgetAjax.send('/usr/savePass', {
 			password: password
 		});
 	}

@@ -27,9 +27,9 @@ var moduleStat = {
 				to: (year + '-' + month + '-' + day)
 			};
 
-		keeper.success = keeper.bind(this._success, this);
+		keeper.widgetAjax.success = keeper.bind(this._success, this);
 
-		keeper.ajax('/stat/change', data);
+		keeper.widgetAjax.send('/stat/change', data);
 	},
 	showChart: function(categories, series) {
 		var chart;
