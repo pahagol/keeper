@@ -22,7 +22,7 @@
 					</select>
 				</td>
 				<td align="left">
-					<input type="text" class="dictionaryExpenseName" name="dictionaryExpenseName" value="<?=$expense->name?>" data-dictionaryExpenseNameId="<?=$expense->dictionaryExpenseNameId?>" data-id="<?=$expense->id?>" onkeyup="moduleView.enterAddDictionaryExpenseName(this, event)"/>
+					<input type="text" class="dictionaryExpenseName" name="dictionaryExpenseName" data-value="<?=$expense->name?>" value="<?=$expense->name?>" data-dictionaryExpenseNameId="<?=$expense->dictionaryExpenseNameId?>" data-id="<?=$expense->id?>" onkeyup="moduleView.enterAddDictionaryExpenseName(this, event)"/>
 				</td>
 				<td align="left">
 					<input type="text" name="price" value="<?=$expense->price?>" data-id="<?=$expense->id?>" data-value="<?=$expense->price?>" onkeyup="moduleView.pressPriceInput(this, '#price-sum-<?=$date?>', event)" onblur="moduleView.savePriceInput(this, '#price-sum-<?=$date?>')" />

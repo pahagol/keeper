@@ -5,7 +5,13 @@ var moduleView = {
 
 	_success: function() {
 		keeper.showMessage('Данные успешно обработаны', 'green');
-		$('input').blur();
+		// $('input').blur();
+	},
+
+	_successExpenseName: function(input, value) {
+		$(input).attr('data-value', value);
+		$(input).blur();
+		keeper.showMessage('Данные успешно обработаны', 'green');
 	},
 
 	_successPrice: function(data) {
@@ -60,7 +66,7 @@ var moduleView = {
 			return;
 		}
 
-		keeper.widgetAjax.success = this._success;
+		keeper.widgetAjax.success = keeper.bind(function() {this._successExpenseName(input, value)}, this);
 		keeper.widgetAjax.send('/view/saveDictionaryExpenseName', {name: value, expenseId: expenseId, dictionaryExpenseNameId: dictionaryExpenseNameId});
 			
 	},
