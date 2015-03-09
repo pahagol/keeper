@@ -36,7 +36,7 @@
 		<tr>
 			<td>Расход:</td>
 			<td>
-				<input type="text" name="price" />
+				<input type="text" name="price" autocomplete="off" />
 			</td>
 		</tr>
 		<tr>

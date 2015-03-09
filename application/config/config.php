@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://keeper/';
+$config['base_url']	= 'https://keeper/';
 
 /*
 |--------------------------------------------------------------------------

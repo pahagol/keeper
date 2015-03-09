@@ -49,6 +49,7 @@ var moduleAdd = {
 	success: function(data) {
 		keeper.viewSumMonthPrice(data.price);
 		keeper.showMessage('Данные успешно обработаны', 'green');
+		$('input[name="name"]').focus();
 	}
 };
 

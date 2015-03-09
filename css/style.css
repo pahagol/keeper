@@ -108,6 +108,7 @@ STRUCTURE					 */
 	min-height: 100%;
   	height: auto !important;
   	height: 100%;
+  	margin-bottom: 43px;
 }
 #header{}
 #register{margin-top:30px;}
@@ -269,22 +270,28 @@ margin-top: 10px;
 	border-collapse: collapse;
 }
 .data-item table td {
-	width: 100px;
+	width: 80px;
 	height: 20px;
 	margin: 0;
 	padding: 0;
 	border: 0;
 	border: 1px solid gray;
 }
+.data-item .l-td {
+	width: 40px;
+}
 .data-item td span, 
 .data-item td select, 
 .data-item td input {
-	width: 96px;
+	width: 76px;
 	height: 17px;
 	margin: 0 2px 0 2px;
 	padding: 0;
 	border: 0;
 	background-color: #fff;
+}
+.data-item .l-td input {
+	width: 36px;
 }
 .data-item table .view-action {
 	width: 20px;
