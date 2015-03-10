@@ -3,9 +3,11 @@
 var moduleStat = {
 	_success: function(data) {
 		var categories = JSON.parse(data.categories),
-			series = JSON.parse(data.series);
+			series = JSON.parse(data.series),
+			period = JSON.parse(data.period),
+			title = 'c ' + period.from + ' по ' + period.to;
 		
-		this.showChart(categories, series);
+		this.showChart(categories, series, title);
 	},
 	
 	changeSelect: function() {
@@ -31,15 +33,22 @@ var moduleStat = {
 
 		keeper.widgetAjax.send('/stat/change', data);
 	},
-	showChart: function(categories, series) {
-		var chart;
+	showChart: function(categories, series, title) {
+		var chart,
+			title = 'Статистика ' + (title || '');
 
+		if (!categories || !series) {
+			console.log(categories, series);
+			keeper.showMessage('Error: categories or series are empty');
+			return;
+		}
+// console.log(categories, series);
 		chart = new Highcharts.Chart({
 			chart: {
 				renderTo: 'chart-container'
 			},
 			title: {
-				text: 'Статистика'
+				text: title
 			},
 			xAxis: {
 				categories: categories

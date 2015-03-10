@@ -47,4 +47,13 @@ class Project
 		preg_match('/^\/(\w+)/', $_SERVER['REQUEST_URI'], $currentPage);
 		return empty($currentPage) ? static::START_PAGE : $currentPage[1];	
 	}
+
+	public static function getFormatDate($format, $date)
+	{
+		if (!$stamp = strtotime($date)) {
+			var_dump($date);
+			throw new Exception('Error: Date is wrong format');
+		}
+		return date($format, $stamp);
+	}
 }

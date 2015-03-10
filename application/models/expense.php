@@ -108,7 +108,7 @@ class Expense extends Keeper
 		return $this->db->get($this->_table)->row();
 	}
 
-	public function getDays($userId, $from, $to = null)
+	public function getUniqueDateByPeriod($userId, $from, $to = null)
 	{
 		if (empty($userId)) {
 			throw new Exception('userId is empty');

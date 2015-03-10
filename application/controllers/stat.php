@@ -76,10 +76,10 @@ class Stat extends Base
 			throw new Exception('Error: categories is empty');
 		}
 		
-		if ($dates = $this->expense->getDays($this->_user->id, $from, $to)) {
+		if ($dates = $this->expense->getUniqueDateByPeriod($this->_user->id, $from, $to)) {
 			
 			foreach ($dates as $date) {
-				$options[] = $date->dateAdd;	
+				$options[] = Project::getFormatDate('d', $date->dateAdd);	
 			}
 			
 			foreach ($dataOptions as $dataOption) {
@@ -102,6 +102,7 @@ class Stat extends Base
 		}
 
 		return array(
+			'period' => json_encode(array('from' => $from, 'to' => $to)), 
 			'series' => json_encode($series),
 			'categories' => json_encode($options),
 		);

@@ -15,8 +15,9 @@
 <script type="text/javascript">
 $(function() {	
 	var categories = <?=$categories?>,
-		series = <?=$series?>;
-
-	moduleStat.showChart(categories, series);
+		series = <?=$series?>,
+		period = <?=$period?>,
+		title = 'c ' + period.from + ' по ' + period.to;
+	moduleStat.showChart(categories, series, title);
 }());
 </script>
