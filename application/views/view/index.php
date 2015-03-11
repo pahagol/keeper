@@ -7,7 +7,7 @@
 </div>
 <div class="clear"></div>
 <? foreach ($groups as $date => $group): ?>
-	<div class="data-item">
+	<div class="data-item" onmouseout="moduleView.toggle(this)" onmouseover="moduleView.toggle(this)">
 		<table>
 			<tr>
 				<td colspan="3" style="width:230px"><?=$date?> <?=Project::getWeekDay($date)?></td>
@@ -15,7 +15,7 @@
 			</tr>
 		<? if (is_array($group)): ?>
 		<? foreach ($group as $expense): ?>
-			<tr id="tr-expense-<?=$expense->id?>">
+			<tr id="tr-expense-<?=$expense->id?>" class="block-data-hide" style="display:none">
 				<td align="left">
 					<select onchange="moduleView.saveSelect(this, <?=$expense->id?>, 'categoryId')">
 					<? foreach ($categories as $category): ?>
@@ -32,7 +32,7 @@
 				<td class="view-action button-red" onclick="moduleView.del(<?=$expense->id?>, '#price-sum-<?=$date?>')" title="Удалить"></td>
 			</tr>
 		<? endforeach ?>
-			<tr>
+			<tr class="block-data-hide" style="display:none">
 				<td align="left" colspan="2">
 					<span>Сумма</span>
 				</td>
