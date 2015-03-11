@@ -10,8 +10,9 @@
 	<div class="data-item">
 		<table>
 			<tr>
-				<td colspan="4"><?=$date?></td>
+				<td colspan="4" style="width:243px"><?=$date?> <?=Project::getWeekDay($date)?></td>
 			</tr>
+		<? if (is_array($group)): ?>
 		<? foreach ($group as $expense): ?>
 			<tr id="tr-expense-<?=$expense->id?>">
 				<td align="left">
@@ -41,8 +42,12 @@
     				</script>
 				</td>
 			</tr>
+		<? endif; ?>
 		</table>
 	</div>
+	<? if (($week = Project::getFormatDate('w', $date)) && $week % 6 == 0): ?>
+		<div class="clear"></div>
+	<? endif ?>
 <? endforeach; ?>
 <script type="text/javascript">
 $(function() {	

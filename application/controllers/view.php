@@ -37,11 +37,35 @@ class View extends Base
 			}
 		}
 
-		$groups = array();
+		$groups = 
+		$temp = array();
 
 		if ($result = $this->expense->getAll($this->_user->id, $from, $to)) {
 			foreach ($result as $res) {
-				$groups[$res->dateAdd][] = $res;
+				$temp[$res->dateAdd][] = $res;
+			}
+
+			// ставляем недостающие дни недели прошлого месяца, чтоб было кратно неделе
+			if ($weekday = Project::getFormatDate('w', $from)) {
+				$weekday = (int)$weekday;
+				for ($i = 0; $i < $weekday; $i++) {
+					$day = $weekday - $i;
+					$key = date('Y-m-d', strtotime($from . '-' . $day . ' days'));
+					$groups[$key] = false;
+				}
+			}
+
+			// ставляем недостающие дни текущего месяца
+			$lastDayMonth = date('t', strtotime($from));
+			for ($i = 1; $i <= $lastDayMonth; $i++) {
+
+				$day = ($i < 10) ? '0' . $i : $i;
+				$key = $currentYearMonth . '-' . $day;
+				if (!isset($temp[$key])) {
+					$groups[$key] = false;
+				} else {
+					$groups[$key] = $temp[$key];
+				}
 			}
 		}
 

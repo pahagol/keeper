@@ -22,6 +22,16 @@ class Project
 		'nov',
 		'des',
 	);
+
+	public static $weekNames = array(
+		'Понедельник',
+		'Вторник',
+		'Среда',
+		'Четверг',
+		'Пятница',
+		'Суббота',
+		'Воскресенье',
+	);
 	
 	public function __construct()
 	{
@@ -55,5 +65,11 @@ class Project
 			throw new Exception('Error: Date is wrong format');
 		}
 		return date($format, $stamp);
+	}
+
+	public static function getWeekDay($date)
+	{
+		$day = static::getFormatDate('w', $date);
+		return static::$weekNames[$day];
 	}
 }

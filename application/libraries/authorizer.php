@@ -2,7 +2,7 @@
 
 class Authorizer
 {
-	protected $_sessionLifeTime = 3600;
+	protected $_sessionLifeTime = 86400; // сутки
 
 	public function __construct()
 	{
