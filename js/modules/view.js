@@ -158,6 +158,15 @@ var moduleView = {
 
 		keeper.widgetAjax.success = keeper.bind(this._successPrice, this);
 		keeper.widgetAjax.send('/view/delete', {id: id});
+	},
+
+	add: function(date) {
+		if (!date || !(new RegExp(keeper.datePattern)).test(date)) {
+			keeper.showMessage('Дата не задана или формат не верный');
+			return;
+		}
+
+		location.href = '/?dateAdd=' + date;
 	}
 };
 

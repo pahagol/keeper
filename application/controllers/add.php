@@ -11,10 +11,16 @@ class Add extends Base
 		$this->load->model('Category', 'category');
 		$this->load->model('Owner', 'owner');
 
+		$dateAdd = $this->input->get('dateAdd');
+
+		if (!preg_match(Project::DATE_PATTERN, $dateAdd)) {
+			$dateAdd = date('Y-m-d');
+		}
+
 		$view = array(
 			'categories' => $this->category->getAllByUserId($this->_user->id),
 			'owners' => $this->owner->getAllByUserId($this->_user->id),
-			'now' => date('Y-m-d'),
+			'now' => $dateAdd,
 		);
 
 		$this->_view['content'] = $this->load->view('add/index', $view, true);

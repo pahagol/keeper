@@ -59,7 +59,6 @@ $(function() {
 				<?= !empty($content) ? $content : '' ?>
 			</div>
 		</div>
-		<!-- <div id="buffer"></div> -->
 	</div>
 	<div  id="footer" class="clearfix">
 		<p class="left"></p>

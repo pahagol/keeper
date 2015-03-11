@@ -268,7 +268,7 @@ margin-top: 10px;
 	border-collapse: collapse;
 }
 .data-item table td {
-	width: 80px;
+	width: 60px;
 	height: 20px;
 	margin: 0;
 	padding: 0;
@@ -276,12 +276,12 @@ margin-top: 10px;
 	border: 1px solid gray;
 }
 .data-item .l-td {
-	width: 40px;
+	width: 60px;
 }
 .data-item td span, 
 .data-item td select, 
 .data-item td input {
-	width: 76px;
+	width: 80px;
 	height: 17px;
 	margin: 0 2px 0 2px;
 	padding: 0;
@@ -297,9 +297,16 @@ margin-top: 10px;
 	margin: 0;
 	padding: 0;
 	border: 0;
-	background-color: #E06666;
 	border: 1px solid gray;
 	cursor: pointer;
+}
+
+.button-red {
+	background-color: #E06666;
+}
+
+.button-green {
+	background-color: #4BCC93;
 }
 
 /******************* add ***********************/

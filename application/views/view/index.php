@@ -10,7 +10,8 @@
 	<div class="data-item">
 		<table>
 			<tr>
-				<td colspan="4" style="width:243px"><?=$date?> <?=Project::getWeekDay($date)?></td>
+				<td colspan="3" style="width:230px"><?=$date?> <?=Project::getWeekDay($date)?></td>
+				<td class="view-action button-green" onclick="moduleView.add('<?=$date?>')" title="Добавить"></td>
 			</tr>
 		<? if (is_array($group)): ?>
 		<? foreach ($group as $expense): ?>
@@ -28,7 +29,7 @@
 				<td class="l-td" align="left">
 					<input type="text" name="price" value="<?=$expense->price?>" data-id="<?=$expense->id?>" data-value="<?=$expense->price?>" onkeyup="moduleView.pressPriceInput(this, '#price-sum-<?=$date?>', event)" onblur="moduleView.savePriceInput(this, '#price-sum-<?=$date?>')" />
 				</td>
-				<td class="view-action" onclick="moduleView.del(<?=$expense->id?>, '#price-sum-<?=$date?>')" title="Удалить"></td>
+				<td class="view-action button-red" onclick="moduleView.del(<?=$expense->id?>, '#price-sum-<?=$date?>')" title="Удалить"></td>
 			</tr>
 		<? endforeach ?>
 			<tr>
