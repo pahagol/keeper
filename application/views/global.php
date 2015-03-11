@@ -20,6 +20,11 @@
 <script type="text/javascript" src="js/modules/<?=Project::getJSModuleName()?>.js"></script>
 <script type="text/javascript">
 $(function() {
+	const MIN_WIDTH_VIEW_PAGE = 1800;
+	var module = '<?=Project::getJSModuleName()?>';
+	if (module == 'view' && document.body.clientWidth < MIN_WIDTH_VIEW_PAGE) {
+		document.body.style.width = MIN_WIDTH_VIEW_PAGE + 'px';
+	}
 	$('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
 });
 </script>
