@@ -1,5 +1,5 @@
-<div style="width: 100%; height: 40px; background-color:grey">
-	<select class="right" style="width:100px;margin:10px;background-color:#fff" onchange="moduleView.changePeriod(this)">
+<div class="subpanel">
+	<select class="right" onchange="moduleView.changePeriod(this)">
 		<? foreach ($dates as $date): ?>
 			<option value="<?=$date['value']?>"<?=$date['current'] ? ' selected' : ''?>><?=$date['html']?></option>
 		<? endforeach ?>
@@ -7,15 +7,16 @@
 </div>
 <div class="clear"></div>
 <? foreach ($groups as $date => $group): ?>
-	<div class="data-item" onmouseout="moduleView.toggle(this)" onmouseover="moduleView.toggle(this)">
+	<!-- <div class="data-item" onmouseout="moduleView.toggle(this)" onmouseover="moduleView.toggle(this)"> -->
+	<div class="data-item">
 		<table>
 			<tr>
-				<td colspan="3" style="width:230px"><?=$date?> <?=Project::getWeekDay($date)?></td>
+				<td class="block-data-show" colspan="3"><?=$date?> <?=Project::getWeekDay($date)?></td>
 				<td class="view-action button-green" onclick="moduleView.add('<?=$date?>')" title="Добавить"></td>
 			</tr>
 		<? if (is_array($group)): ?>
 		<? foreach ($group as $expense): ?>
-			<tr id="tr-expense-<?=$expense->id?>" class="block-data-hide" style="display:none">
+			<tr id="tr-expense-<?=$expense->id?>" class="block-data-hide">
 				<td align="left">
 					<select onchange="moduleView.saveSelect(this, <?=$expense->id?>, 'categoryId')">
 					<? foreach ($categories as $category): ?>
@@ -32,7 +33,7 @@
 				<td class="view-action button-red" onclick="moduleView.del(<?=$expense->id?>, '#price-sum-<?=$date?>')" title="Удалить"></td>
 			</tr>
 		<? endforeach ?>
-			<tr class="block-data-hide" style="display:none">
+			<tr class="block-data-hide">
 				<td align="left" colspan="2">
 					<span>Сумма</span>
 				</td>

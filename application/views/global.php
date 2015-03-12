@@ -19,10 +19,12 @@
 <script type="text/javascript" src="js/widget/dialog.js"></script>
 <script type="text/javascript" src="js/modules/<?=Project::getJSModuleName()?>.js"></script>
 <script type="text/javascript">
-$(function() {
+$(document).ready(function() {
 	const MIN_WIDTH_VIEW_PAGE = 1810;
 	var module = '<?=Project::getJSModuleName()?>';
 	if (module == 'view' && document.body.clientWidth < MIN_WIDTH_VIEW_PAGE) {
+		$('#top_menu .right').css('margin-right', (MIN_WIDTH_VIEW_PAGE - document.body.clientWidth) + 'px');
+		$('.subpanel select').css('margin-right', (MIN_WIDTH_VIEW_PAGE - document.body.clientWidth + 10) + 'px');
 		document.body.style.width = MIN_WIDTH_VIEW_PAGE + 'px';
 	}
 	$('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});

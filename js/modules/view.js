@@ -169,20 +169,8 @@ var moduleView = {
 		location.href = '/?dateAdd=' + date;
 	},
 
-	show: function(elm) {
-		var parent = $(elm).parent();
-		$(parent).find('.block-data-hide').show();
-		console.log('show');
-	},
-
-	hide: function(elm) {
-		$(elm).find('.block-data-hide').hide();
-		console.log('hide');
-	},
-
 	toggle: function(elm) {
 		$(elm).find('.block-data-hide').toggle();
-		console.log('toggle');
 	}
 };
 
