@@ -7,8 +7,8 @@
 </div>
 <div class="clear"></div>
 <? foreach ($groups as $date => $group): ?>
-	<!-- <div class="data-item" onmouseout="moduleView.toggle(this)" onmouseover="moduleView.toggle(this)"> -->
-	<div class="data-item">
+	<div class="data-item" onmouseout="moduleView.toggle(this)" onmouseover="moduleView.toggle(this)">
+	<!--div class="data-item"-->
 		<table>
 			<tr>
 				<td class="block-data-show" colspan="3"><?=$date?> <?=Project::getWeekDay($date)?></td>

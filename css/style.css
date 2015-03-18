@@ -263,6 +263,21 @@ margin-top: 10px;
 	margin:5px 0 0 5px;
 	width: 253px;
 }
+/*.data-item:before {
+	content: '';
+	display: block;
+	height: 21px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 6;
+}
+.data-item:hover {
+	overflow: visible;
+	position: relative;
+	z-index: 10 !important;
+}*/
 .data-item tr {
 	width: 253px;
 }
@@ -312,12 +327,12 @@ margin-top: 10px;
 	display: none;
 }
 
-.data-item:hover {
+/*.data-item:hover {
 	z-index: 3;
-}
-.data-item:hover .block-data-hide {
+}*/
+/*.data-item:hover .block-data-hide {
 	display: block;
-}
+}*/
 
 .subpanel {
 	width: 100%; 
