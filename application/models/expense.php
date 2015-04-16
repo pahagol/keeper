@@ -61,6 +61,23 @@ class Expense extends Keeper
 		}
 	}
 
+	public function getCountRecordInDay($userId, $day)
+	{
+		if (empty($userId)) {
+			throw new Exception('userId is empty');
+		}
+		if (empty($day) || !preg_match(Project::DATE_PATTERN, $day)) {
+			throw new Exception('Date is empty or wrong');
+		}
+		$query = $this->db->select('COUNT(*) AS `count`')
+			->where('userId = ' . $userId . ' AND dateAdd >= "' . $day . '" AND dateAdd <= "' . $day . '"')
+			->get($this->_table);
+
+		$result = $query->row();
+
+		return $result['count'];
+	}
+
 	public function getSumPriceByPeriod($userId, $from, $to = null)
 	{
 		if (empty($userId)) {

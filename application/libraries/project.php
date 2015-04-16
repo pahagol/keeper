@@ -2,6 +2,7 @@
 
 class Project
 {
+	const MAX_COUNT_RECORD_IN_DAY = 10;
 	const DATE_PATTERN = '/^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])$/';
 	const START_PAGE = 'add';
 	

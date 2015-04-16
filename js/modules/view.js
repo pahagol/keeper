@@ -140,11 +140,7 @@ var moduleView = {
 			summa += parseInt($(this).val());
 		});
 
-		if (summa) {
-			$(elmId).html(summa);
-		} else {
-			$(parent).remove();
-		}
+		$(elmId).html(summa || 0);
 	},
 
 	del: function(id, elmId) {
@@ -167,11 +163,11 @@ var moduleView = {
 		}
 
 		location.href = '/?dateAdd=' + date;
-	},
+	}/*,
 
 	toggle: function(elm) {
 		$(elm).find('.block-data-hide').toggle();
-	}
+	}*/
 };
 
 window['moduleView'] = moduleView;

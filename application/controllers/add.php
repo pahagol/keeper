@@ -49,6 +49,11 @@ class Add extends Base
 			return;
 		}
 
+		if ($this->expense->getCountRecordInDay($userId, $dateAdd) >= Project::MAX_COUNT_RECORD_IN_DAY) {
+			$this->output->set_output(json_encode(array('error' => 'Can\'t add record, max limit ' . Project::MAX_COUNT_RECORD_IN_DAY . 'records')));
+			return;
+		}
+
 		if (empty($dictionaryExpenseNameId)) {
 			if (!$dictionaryExpenseNameId = $this->dictionaryExpenseName->getIdByUserIdValue($userId, $name)) {
 				if (!$dictionaryExpenseNameId = $this->dictionaryExpenseName->add(array(

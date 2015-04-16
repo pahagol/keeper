@@ -7,52 +7,60 @@
 </div>
 <div class="clear"></div>
 <? foreach ($groups as $date => $group): ?>
-	<div class="data-item" onmouseout="moduleView.toggle(this)" onmouseover="moduleView.toggle(this)">
-	<!--div class="data-item"-->
+	<div class="data-item">
 		<table>
 			<tr>
 				<td class="block-data-show" colspan="3"><?=$date?> <?=Project::getWeekDay($date)?></td>
 				<td class="view-action button-green" onclick="moduleView.add('<?=$date?>')" title="Добавить"></td>
 			</tr>
+		<? $count = is_array($group) ? count($group) : 0 ?>
 		<? if (is_array($group)): ?>
-		<? foreach ($group as $expense): ?>
-			<tr id="tr-expense-<?=$expense->id?>" class="block-data-hide">
-				<td align="left">
-					<select onchange="moduleView.saveSelect(this, <?=$expense->id?>, 'categoryId')">
-					<? foreach ($categories as $category): ?>
-						<option value="<?=$category->id?>"<? if ($category->id == $expense->categoryId):?> selected<?endif?>><?=$category->name?></option>
-					<? endforeach ?>
-					</select>
-				</td>
-				<td align="left">
-					<input type="text" class="dictionaryExpenseName" name="dictionaryExpenseName" data-value="<?=$expense->name?>" value="<?=$expense->name?>" data-dictionaryExpenseNameId="<?=$expense->dictionaryExpenseNameId?>" data-id="<?=$expense->id?>" onkeyup="moduleView.enterAddDictionaryExpenseName(this, event)"/>
-				</td>
-				<td class="l-td" align="left">
-					<input type="text" name="price" value="<?=$expense->price?>" data-id="<?=$expense->id?>" data-value="<?=$expense->price?>" onkeyup="moduleView.pressPriceInput(this, '#price-sum-<?=$date?>', event)" onblur="moduleView.savePriceInput(this, '#price-sum-<?=$date?>')" />
-				</td>
-				<td class="view-action button-red" onclick="moduleView.del(<?=$expense->id?>, '#price-sum-<?=$date?>')" title="Удалить"></td>
+			<? foreach ($group as $expense): ?>
+				<tr id="tr-expense-<?=$expense->id?>">
+					<td align="left">
+						<select onchange="moduleView.saveSelect(this, <?=$expense->id?>, 'categoryId')">
+						<? foreach ($categories as $category): ?>
+							<option value="<?=$category->id?>"<? if ($category->id == $expense->categoryId):?> selected<?endif?>><?=$category->name?></option>
+						<? endforeach ?>
+						</select>
+					</td>
+					<td align="left">
+						<input type="text" class="dictionaryExpenseName" name="dictionaryExpenseName" data-value="<?=$expense->name?>" value="<?=$expense->name?>" data-dictionaryExpenseNameId="<?=$expense->dictionaryExpenseNameId?>" data-id="<?=$expense->id?>" onkeyup="moduleView.enterAddDictionaryExpenseName(this, event)"/>
+					</td>
+					<td class="l-td" align="left">
+						<input type="text" name="price" value="<?=$expense->price?>" data-id="<?=$expense->id?>" data-value="<?=$expense->price?>" onkeyup="moduleView.pressPriceInput(this, '#price-sum-<?=$date?>', event)" onblur="moduleView.savePriceInput(this, '#price-sum-<?=$date?>')" />
+					</td>
+					<td class="view-action button-red" onclick="moduleView.del(<?=$expense->id?>, '#price-sum-<?=$date?>')" title="Удалить"></td>
+				</tr>
+			<? endforeach ?>
+		<? endif ?>
+		<? for ($i = $count; $i < Project::MAX_COUNT_RECORD_IN_DAY; $i++): ?>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td class="l-td">&nbsp;</td>
+				<td class="view-action" style="cursor:default">&nbsp;</td>
 			</tr>
-		<? endforeach ?>
-			<tr class="block-data-hide">
+		<? endfor ?>
+			<tr>
 				<td align="left" colspan="2">
 					<span>Сумма</span>
 				</td>
 				<td align="left" colspan="2">
 					<span id="price-sum-<?=$date?>"></span>
 					<script type="text/javascript">
-    					moduleView.sumPrice('#price-sum-<?=$date?>');
-    				</script>
+						moduleView.sumPrice('#price-sum-<?=$date?>');
+					</script>
 				</td>
 			</tr>
-		<? endif; ?>
 		</table>
 	</div>
 	<? if (($week = Project::getFormatDate('w', $date)) && $week % 6 == 0): ?>
 		<div class="clear"></div>
 	<? endif ?>
-<? endforeach; ?>
+<? endforeach ?>
 <script type="text/javascript">
-$(function() {	
+$(function() {
 	$('.dictionaryExpenseName').each(function() {
 		var input = $(this);
 
@@ -68,10 +76,8 @@ $(function() {
 			
 			maxHeight:400,
 			width:300,
-			deferRequestBy: 300 //miliseconds
-			// appendTo: ''
+			deferRequestBy: 300
 		});
 	});
 });
 </script>
-

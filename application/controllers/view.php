@@ -55,7 +55,7 @@ class View extends Base
 				}
 			}
 
-			// ставляем недостающие дни текущего месяца
+			// вставляем недостающие дни текущего месяца
 			$lastDayMonth = date('t', strtotime($from));
 			for ($i = 1; $i <= $lastDayMonth; $i++) {
 
